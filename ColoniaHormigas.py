@@ -6,13 +6,13 @@ import matplotlib.pyplot as plt
 class Hormiguero:
     def __init__(self) -> None:
         self.grafo = nx.DiGraph()
-        self.iteraciones = 5
+        self.iteraciones = 100
         self.comida = 100000000000
         self.mejor_distancia = 0
         self.mejor_solucion = []
         self.poblacion_hormiga = []
         self.nodo_hormiguero = 'A'
-        self.nodo_comida = 'T'
+        self.nodo_comida = 'L'
         self.cantidad_fermona_global = 0.01
         self.cantidad_hormiga = 10
         self.cantidad_fermonaXH = 2
@@ -28,10 +28,10 @@ class Hormiguero:
 
     def crear_campo(self) :        
         # Agregar nodos
-        #campo = ["A", "B", "C", "D", "F", "H", "J", "K", "L"]
+        campo = ["A", "B", "C", "D", "F", "H", "J", "K", "L", "FILIPINAS"]
         #campo = ["A", "B", "C", "D", "E", "F", "G"]
-        campo = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 
-                  'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T']
+        """campo = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 
+                  'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T']"""
         
         self.grafo.add_nodes_from(campo)
         
@@ -157,7 +157,6 @@ class Hormiguero:
         pase = random.randint(1, 100)
         suma_probabily = 0
         valor_x_nodo = self.value_next_node(nodo_vecino, ant)
-        print(nodo_vecino, valor_x_nodo)
         for nodo in valor_x_nodo :
             porcentajes.append(nodo*100/sum(valor_x_nodo))
         for i in range(len(porcentajes)) :
@@ -238,7 +237,7 @@ class Hormiguero:
         self.crear_campo()
         for i in range(self.iteraciones) :
             self.mover_hormiga()
-            if i % 1 == 0:
+            if i % 10 == 0:
                 print("Iteracion: " + str(i))
                 print("Mejor solucion: " + str(self.mejor_solucion))
                 print("Mejor distancia: " + str(self.mejor_distancia))
